@@ -73,19 +73,22 @@ function remove(s, result, last_i, last_j, par, count, removed) {
 // Time O(N), 2 pass
 
 function removeInvalidParentheses(str) {
-    let left = remove(str, ['(', ')']);
+    let removed = {count: 0};
+    let left = remove(str, ['(', ')'], removed);
     let reversed = left.split('').reverse().join('');
-    let right = remove(reversed, [')', '(']);
+    let right = remove(reversed, [')', '('], removed);
+    console.log('Removed:', removed.count);
     return right.split('').reverse().join('');
 }
 
-function remove(str, p) {
+function remove(str, p, removed) {
     let stack = 0;
     for(let i = 0; i < str.length; i++) {
         if(str[i] === p[0]) stack++;
         if(str[i] === p[1]) stack--;
         // Unbalance
         if(stack < 0) {
+            removed.count++;
             str = str.substring(0, i) + str.substring(i+1);
             i--;
             stack = 0;
@@ -96,6 +99,6 @@ function remove(str, p) {
 
 
 
-str = "()())()"
+str = "()())())()"
 console.log(removeInvalidParentheses(str));
 
