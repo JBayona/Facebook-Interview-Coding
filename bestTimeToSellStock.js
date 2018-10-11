@@ -38,3 +38,31 @@ var maxProfit = function(prices) {
     }
     return result;
 };
+
+
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {  
+    // Kadane's Algorithm
+    /*
+	    All the straight forward solution should work, but if the interviewer twists the question slightly by giving the
+	    difference array of prices, Ex: for {1, 7, 4, 11}, if he gives {0, 6, -3, 7}, you might end up being confused.
+		Here, the logic is to calculate the difference (maxCur += prices[i] - prices[i-1]) of the original array, and find
+		a contiguous subarray giving maximum profit. If the difference falls below 0, reset it to zero.
+
+		I spent some time convincing myself about why we need to reset to zero. By reseting maxCur to 0, essentially it
+		means that we have found a point i where the price[i] is lower than the time we bought, and that we should then try
+		to buy at point i to see if we can achieve a bigger gain. Because maxCur is recording the difference, the
+		difference between price[i] and itself should be 0
+    */
+    let currentMax = 0;
+    let maxSoFar = 0;
+    for(let i = 1; i < prices.length; i++) {
+        currentMax += prices[i] - prices[i-1];
+        currentMax = Math.max(0, currentMax);
+        maxSoFar = Math.max(maxSoFar, currentMax);
+    }
+    return maxSoFar;
+};
