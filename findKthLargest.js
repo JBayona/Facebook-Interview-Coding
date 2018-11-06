@@ -20,6 +20,7 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/description/
 var findKthLargest = function(nums, k) {
     let left = 0;
     let right = nums.length - 1;
+    // Para sacar el kth smallest es k = nums.length - k * 1
     while (true) { // this problem guaranteed to have a valid answer
         let pos = partition(nums, left, right);
         if (pos == k - 1)   return nums[pos];
