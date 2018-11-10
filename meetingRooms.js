@@ -20,6 +20,19 @@ var canAttendMeetings = function(intervals) {
   return true;
 };
 
+var canAttendMeetings = function(intervals) {
+    // Sort the intervals per end time so we can check if collapses
+    let sorted = intervals.sort((a,b) => a.start - b.start);
+  
+    for(let i = 1 ; i < intervals.length; i++) {
+        if(sorted[i].start < sorted[i-1].end) {
+            return false;
+        }
+    }
+  
+  return true;
+};
+
 //intervals = [{start: 0, end: 30}, {start: 5, end: 10}, {start: 15, end: 20}]; // false
 intervals = [{start: 7, end: 10}, {start: 2, end: 4}]; // true
 console.log(canAttendMeetings(intervals));
