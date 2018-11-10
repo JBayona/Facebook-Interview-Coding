@@ -39,7 +39,7 @@ function helper(node, val) {
   // Update value
   val = (val * 10) + node.val;
   
-  // Check if we reacha leaf to return the value
+  // Check if we reach leaf node to return the value
   if(!node.left && !node.right) {
     return val;
   }
