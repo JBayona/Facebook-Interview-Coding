@@ -117,7 +117,7 @@ public int minMeetingRooms(Interval[] intervals) {
     return i1.end - i2.end;
    }
   });
-  pq.push(intervals[0]);
+  pq.add(intervals[0]);
 
   for (int i = 1; i < intervals.length; i++) {
     Interval interval = pq.poll();
