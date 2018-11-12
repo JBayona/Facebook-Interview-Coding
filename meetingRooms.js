@@ -112,6 +112,7 @@ public int minMeetingRooms(Interval[] intervals) {
   
   
   // Min heap
+  // We sort by end so we can extend or reuse the meeting room, that´s why we use end time.
   PriorityQueue<Interval> pq = new PriorityQueue<>(new Comparator<Interval>(){
    public int compare(Interval i1, Interval i2) {
     return i1.end - i2.end;
