@@ -33,6 +33,7 @@ function dfs(node, tmp, result){
   // Base case
   if(!node) return;
   
+  // Preorder action
   tmp =  tmp ? tmp + '->' + node.val : node.val;
   if(!node.left && !node.right){
     // No es necesario limpiar porque a la vuelta rompera con el base case
@@ -67,7 +68,7 @@ function binaryTreePaths(root) {
    // Path is the concatenation in preorder traversal
    let path = paths.pop();
 
-   // Check if is leaf node
+   // Check if is leaf node (Action)
    if(!current.left && !current.right) {
     result.push(path.toString()); 
    }
@@ -84,6 +85,48 @@ function binaryTreePaths(root) {
 
   return result;
 }
+
+// BFS
+var binaryTreePaths = function(root) {
+  if(!root) {
+    return [];
+  }
+
+  let map = {} // (node, parent node);
+  let queue = [];
+  let queueStr = [];
+  queue.push(root);
+  queueStr.push("");
+  map[root] = null;
+  result = [];
+
+  while(queue.length) {
+    let node = queue.shift();
+    let currStr = queueStr.shift();
+
+    // Action
+    console.log(node.val);
+    // It´s a leaf node
+    if(!node.left && !node.right) {
+      //let str = getPaths(map, node);
+      result.push(currStr + node.val);
+    }
+
+
+    if(node.left) {
+      queue.push(node.left);
+      queueStr.push(currStr + node.val + '->');
+      map[node.left] = node;
+    }
+    if(node.right) {
+      queue.push(node.right);
+      queueStr.push(currStr + node.val + '->');
+      map[node.right] = node;
+    }
+  }
+
+  return result;
+};
 
 // Opción 1
 function Node(val, left, right){
