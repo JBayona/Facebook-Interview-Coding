@@ -1,6 +1,6 @@
 /*
 Given n nodes labeled from 0 to n-1 and a list of undirected edges (each edge is a pair of nodes), write
-a function to check whether theses edges make up a valid tree.
+a function to check whether these edges make up a valid tree.
 
 For example
 
@@ -34,7 +34,7 @@ var validTree = function(n, edges) {
 
   // Create the graph
   for(let i = 0; i < n; i++) {
-    graph[i] = []
+    graph[i] = [];
   }
 
   // Fill the undirected graph
