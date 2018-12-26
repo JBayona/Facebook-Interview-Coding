@@ -49,7 +49,7 @@ var removeInvalidParentheses = function(s) {
     return result;
 };
 
-function remove(s, result, last_i, last_j, par, count, removed) {
+function remove(s, result, last_i, last_j, par) {
     let stack = 0;
     for (let i = last_i; i < s.length; ++i) {
         if (s[i] == par[0]) stack++;
@@ -69,6 +69,56 @@ function remove(s, result, last_i, last_j, par, count, removed) {
         result.push(reversed);
     }
 }
+
+// BFS
+var removeInvalidParentheses = function(s) {
+    let res = [];
+    if (s == null) return res;
+
+    let queue = [];
+    let visited = {}; // avoid duplicate results
+    queue.push(s);
+    visited[s] = true;
+    let foundValid = false;
+
+    while (queue.length) {
+        let t = queue.shift();
+        if (isValid(t)) {
+            res.push(t);
+            foundValid = true;
+        }
+        // found valid, no need to remove anymore, just iterative the rest of queue and add to res when necessary
+        // As we need to get the elements with the minimum removed characteres required
+        if (foundValid) continue; 
+        for (let i = 0; i < t.length; i++) {
+            if(t.charAt(i) != '(' && t.charAt(i) != ')') {
+                continue;
+            }
+            // Remove one by one character on the original string i.e= ()())() - )())() - (())() - ()())() - ()()() - ...
+            // This will create a lot of options and add them into our queue
+            let r = t.substring(0, i) + t.substring(i + 1);
+            if (r in visited) continue;
+            visited[r] = true;
+            queue.push(r);
+        }
+  }
+  return res;
+}
+
+function isValid(s) {
+    let count = 0; // stack variable
+    for (let i = 0; i < s.length; i++) {
+        if (s.charAt(i) === '(') count++;
+        if(s.charAt(i) === ')') count--;
+        if(count < 0) {
+            return false;
+        }
+    }
+    return count == 0;
+}
+
+str = "()())()";
+console.log(removeInvalidParentheses(str));
 
 // Time O(N), 2 pass
 
