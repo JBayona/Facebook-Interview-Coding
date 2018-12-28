@@ -20,6 +20,7 @@ node and the level, the root node is level 0, the
 first left child will be -1, next left will be -2
 and so on, for right child will be 1, then 2 and so
 on */
+// A utility function to find min and max distances with respect to root 
 function findMinMaxDistance(node, values, hd) {
 
   // Base case
@@ -40,9 +41,9 @@ function findMinMaxDistance(node, values, hd) {
 }
 
 
-/* Print all the tree by levels if the line
-match with the current level */
-function printVerticalTree(tree, line, hd) {
+// A utility function to print all nodes on a given line_no 
+// hd is horizontal distance of current node with respect to root
+function printVerticalLine(tree, line, hd) {
 
   //Base case
   if(!tree) {
@@ -54,8 +55,8 @@ function printVerticalTree(tree, line, hd) {
     console.log(tree.val);
   }
 
-  printVerticalTree(tree.left, line, hd - 1);
-  printVerticalTree(tree.right, line, hd + 1);
+  printVerticalLine(tree.left, line, hd - 1);
+  printVerticalLine(tree.right, line, hd + 1);
 }
 
 
@@ -66,7 +67,7 @@ function printVertical(tree) {
   findMinMaxDistance(tree, values, 0)
 
   for(let i = values.min; i <= values.max; i++) {
-    printVerticalTree(tree, i, 0)
+    printVerticalLine(tree, i, 0)
     console.log('\n');
   }
 }
