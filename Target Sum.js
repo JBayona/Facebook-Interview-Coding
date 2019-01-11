@@ -22,6 +22,8 @@ The sum of elements in the given array will not exceed 1000.
 Your output answer is guaranteed to be fitted in a 32-bit integer.
 
 https://leetcode.com/problems/target-sum/
+
+Check https://github.com/wey068/Facebook-Interview-Coding/blob/master/494.%20TargetSum.java
 */
 
 // DFS + Memoization
