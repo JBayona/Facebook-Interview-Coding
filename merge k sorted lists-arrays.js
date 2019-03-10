@@ -71,3 +71,36 @@ function mergeTwoLists(l1, l2) {
     return l2;
   }
 }
+
+// Merge K LinkedLists
+// O(nk Log k)
+public class Solution {
+  public ListNode mergeKLists(ListNode[] lists) {
+    if (lists.length == 0) return null;
+    // Minheadp (El nodo es menor o igual al de sus hijos)
+    PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (x, y) -> x.val - y.val);
+    // push the head nodes of all the k lists in 'pq'  
+    for (ListNode node : lists) {
+        if (node != null) {
+            queue.add(node);
+        } 
+    }
+
+    // Nodo temporal
+    ListNode head = new ListNode(0);
+    ListNode p = head;
+    // Mientras tengamos elementos en la pq
+    while (!queue.isEmpty()) {
+      // Saca el menor
+      ListNode node = queue.poll();
+      p.next = node;
+      // Recorremos
+      p = p.next;
+      // Agregamos el next de nuestro nodo actual a la pq
+      if (node.next != null) {
+          queue.add(node.next);
+      }
+    }
+    return head.next;
+  }
+}
