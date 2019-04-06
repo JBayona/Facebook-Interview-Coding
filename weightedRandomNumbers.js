@@ -1,6 +1,9 @@
 /*Generar números aleatorios en base a una probabilidad
+
 http://www.geeksforgeeks.org/random-number-generator-in-arbitrary-probability-distribution-fashion/
+
 */
+
 /*A(1), B(1), C(2) es lo mismo que [A,B,C,C] con numeros 
 de frecuencia muy altos es costoso porque necesitamos mucho espacio*/
 
