@@ -1,5 +1,7 @@
 /*
 
+BFS
+
 https://www.geeksforgeeks.org/minimum-steps-reach-target-knight/
 
 Given a square chessboard of N x N size, the position of Knight and position of a target is given.
