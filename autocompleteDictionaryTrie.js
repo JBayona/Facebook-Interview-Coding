@@ -34,7 +34,7 @@ function dfs(prefix, index, node) {
   if(index < prefix.length) {
     let letter = prefix[index];
     if(node.children[letter]) {
-      dfs(prefix, index + 1, node.children[letter], );
+      dfs(prefix, index + 1, node.children[letter]);
     } else {
       return;
     }
