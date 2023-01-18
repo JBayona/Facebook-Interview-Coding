@@ -19,26 +19,25 @@ https://leetcode.com/problems/valid-palindrome/description/
  * @param {string} s
  * @return {boolean}
  */
-var isPalindrome = function(s) {
-    let left = 0;
-    let right = s.length-1;
-    let alphanumeric = /^[a-z0-9]+$/i;
-    
-    while(left < right) {
-        // Advance until we find an alphanumeric for left
-        while(left < right && !alphanumeric.test(s[left])){
-            left++;
-        }
-        
-        // Advance until we find an alphanumeric for right
-        while(left < right && !alphanumeric.test(s[right])){
-            right--;
-        }
-        
-        // If the alphanumeric are not the same it´s not a palindrome
-        if(s[left++].toLowerCase() !== s[right--].toLowerCase()) {
-            return false;
-        }
+var isPalindrome = function (s) {
+  let left = 0;
+  let right = s.length - 1;
+  let alphanumeric = /^[a-z0-9]+$/i;
+
+  while (left < right) {
+    // Skip non-alphanumeric chars
+    while (left < right && !alphanumeric.test(s[left])) {
+      left++;
     }
-    return true;
+
+    // Skip non-alphanumeric chars
+    while (left < right && !alphanumeric.test(s[right])) {
+      right--;
+    }
+
+    if (s[left++].toLowerCase() !== s[right--].toLowerCase()) {
+      return false;
+    }
+  }
+  return true;
 };
