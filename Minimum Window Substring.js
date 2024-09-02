@@ -32,56 +32,54 @@ ADOBECODE[BANC], MIN WINDOW = 4
 1. Cuando la window está calificada para tener el resultado, movemos el head
 2. Cuando no, movemos la cola del window
 */
-var minWindow = function(s, t) {
+var minWindow = function (s, t) {
   let map = {};
-    
-  // Initialize the characters we have on S
-  for(let i = 0; i < s.length; i++) {
-    map[s[i]] = 0;
+  // We only care about the frequency on T
+  for (const char of t) {
+    map[char] = (map[char] || 0) + 1;
   }
-    
-  // We only care about the frequency of S in T
-  for(let i = 0; i < t.length; i++) {
-    if(t[i] in map) {
-      map[t[i]]++;
-    } else {
-      // If there is no such window in S that covers all characters in T, return the empty string "".
-      return '';
-    }
-  }
-    
-  // Create window
+
   let start = 0;
   let end = 0;
-  let minLength = Number.MAX_SAFE_INTEGER;
+  let minLength = Infinity;
   let minStart = 0;
-  // Indicator to know whether the window is qualified or not, in this case the elements in T that are mapped
-  let numberOfTargets = t.length;
-    
-  while(end < s.length) {
+  let count = t.length;
+
+  while (end < s.length) {
     let current = s[end];
-    if(current in map && (map[current] > 0)) {
-      numberOfTargets--;
+    // Check if the element is in the map, if yes, decrement the target
+    if (current in map) {
+      // As long as we have elements to decrese we deduct
+      if (map[current] > 0) {
+        count--;
+      }
+      // Update the map always, we can have numbers < 0 if our window does not have
+      // a number in the "t" string
+      map[current]--;
     }
-    map[current]--;
-    // This indicates thw window is qualified
-    while(numberOfTargets === 0) {
-      if(minLength > end - start + 1) {
+
+    // Elegible window for a result
+    while (count === 0) {
+      // Try to get the min result
+      if (end - start + 1 < minLength) {
         minLength = end - start + 1;
+        // Track where the min window starts
         minStart = start;
       }
-      let head = s[start];
-      // Move forward the head
-      if(map[head] >= 0) {
-        numberOfTargets++;
+      // Move the window
+      let l = s[start];
+      // We only care about those being tracked
+      // We need to find them again later
+      if (map[l] >= 0) {
+        count++;
       }
-      map[head]++;
-      // Move the head forward
+      map[l]++;
       start++;
     }
-    // Increase the rail of the window
+    // Increase the end window
     end++;
   }
-    
-  return minLength === Number.MAX_SAFE_INTEGER ? '' : s.substring(minStart, minStart + minLength);
+  return minLength === Infinity
+    ? ""
+    : s.substring(minStart, minStart + minLength);
 };
