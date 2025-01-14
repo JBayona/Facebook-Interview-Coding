@@ -15,7 +15,6 @@ get the latest changes.
 https://leetcode.com/problems/word-break/description/
 https://www.programcreek.com/2012/12/leetcode-solution-word-break/
 https://youtu.be/WepWFGxiwRs
-
 */
 
 // O(n^2) en tiempo y memoria O(n)
